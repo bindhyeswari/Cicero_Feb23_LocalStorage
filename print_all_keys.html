@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Local Storage</title>
+    <link rel="stylesheet" href="base.css"/>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            addLSItemRow();
+
+            function createLSItemRow(parent) {
+                var container = createElement('div', parent, '', 'panel');
+                createElement('input', container, '', 'key', { type: 'text' });
+                createElement('input', container, '', 'value', { type: 'text' }).addEventListener('change', addLSItemRow);
+                createElement('button', container, 'Save').addEventListener('click', saveKey);
+                createElement('button', container, 'Delete').addEventListener('click', deleteKey);
+            }
+
+            function addLSItemRow() {
+                createLSItemRow(document.body);
+            }
+
+            function saveKey(event) {
+                var container = event.target.parentNode;
+                localStorage.setItem(container.children[0].value, container.children[1].value);
+            }
+
+            function deleteKey(event) {
+                var container = event.target.parentNode;
+                localStorage.removeItem(container.children[0].value);
+                container.parentNode.removeChild(container);
+            }
+
+            function createElement(type, parent, innerHTML, className, attrs) {
+                var element = document.createElement(type);
+                if (typeof parent !== 'undefined') parent.appendChild(element);
+                if (typeof innerHTML !== 'undefined') element.innerHTML = innerHTML;
+                if (typeof className !== 'undefined') element.className = className;
+                if (typeof attrs !== 'undefined') {
+                    for (var prop in attrs) {
+                        element.setAttribute(prop, attrs[prop]);
+                    }
+                }
+                return element;
+            }
+
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

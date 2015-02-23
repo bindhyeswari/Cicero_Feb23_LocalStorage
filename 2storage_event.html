@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="base.css"/>
+    <title></title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var div = document.querySelector('div');
+            window.addEventListener('storage', function (event) {
+                div.innerHTML = event.key + ' changed from ' + event.oldValue + ' to ' + event.newValue + '<br/>' +
+                    'The page which triggered the change is: ' + event.url;
+
+            })
+        });
+
+    </script>
+</head>
+<body>
+    <div class="panel">
+
+    </div>
+</body>
+</html>

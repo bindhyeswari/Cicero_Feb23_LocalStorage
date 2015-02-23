@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="base.css"/>
+    <title></title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var div = document.querySelector('div');
+            document.querySelector('input').addEventListener('change', function () {
+                localStorage.setItem('name', this.value);
+                div.innerHTML = this.value;
+            });
+
+            window.addEventListener('storage', function (event) {
+                div.innerHTML = event.key + ' changed from ' + event.oldValue + ' to ' + event.newValue;
+            })
+        });
+
+    </script>
+</head>
+<body>
+    <input type="text" id="ls"/>
+    <div class="panel">
+
+    </div>
+</body>
+</html>
