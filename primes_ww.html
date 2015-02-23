@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Primes</title>
+    <link rel="stylesheet" href="base.css"/>
+    <style>
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('button').addEventListener('click', function () {
+                document.querySelector('.panel').innerHTML = Math.random();
+            });
+            document.querySelector('button.primes').addEventListener('click', function () {
+                var div = document.querySelector('div.panel.results');
+                var worker = new Worker('primes_ww.js');
+                worker.addEventListener('message', function (event) {
+                    div.innerHTML = event.data;
+                });
+                worker.postMessage(500000);
+            });
+        });
+
+    </script>
+</head>
+<body>
+<button>Display Random Number</button>
+<div class="panel">Random number here .... </div>
+<button class="primes">Calculate Primes</button>
+<div class="panel results">
+    Primes here ...
+</div>
+</body>
+</html>

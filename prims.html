@@ -13,6 +13,7 @@
             });
             document.querySelector('button.primes').addEventListener('click', function () {
                 var div = document.querySelector('div.panel.results');
+                generatePrimes(500000);
                 div.innerHTML = generatePrimes(500000);
             });
 
