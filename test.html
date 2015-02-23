@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var div = document.querySelector('#results');
+            document.querySelector('#getls').addEventListener('click', function () {
+                if (!window.localStorage) div.innerHTML = 'Localstorage is not supported';
+                else div.innerHTML = localStorage.getItem('name');
+            });
+
+            document.querySelector('#ls').addEventListener('change', function () {
+                if (!window.localStorage) div.innerHTML = 'Localstorage is not supported';
+                else div.innerHTML = localStorage.setItem('name', this.value);
+            })
+        });
+    </script>
+</head>
+<body>
+     <button id="getls">Get LocalStorage Item</button>
+    <div id="results">
+
+    </div>
+    <input type="text" id="ls"/>
+</body>
+</html>
