@@ -1,36 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
+<!doctype html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>Local Storage</title>
+    <title>Print All Keys</title>
     <link rel="stylesheet" href="base.css"/>
     <script>
-
         document.addEventListener('DOMContentLoaded', function () {
 
-            addLSItemRow();
+            printallkeys();
 
-            function createLSItemRow(parent) {
-                var container = createElement('div', parent, '', 'panel');
-                createElement('input', container, '', 'key', { type: 'text' });
-                createElement('input', container, '', 'value', { type: 'text' }).addEventListener('change', addLSItemRow);
-                createElement('button', container, 'Save').addEventListener('click', saveKey);
-                createElement('button', container, 'Delete').addEventListener('click', deleteKey);
-            }
+            window.addEventListener('storage', function (event) {
+                printallkeys();
+            });
 
-            function addLSItemRow() {
-                createLSItemRow(document.body);
-            }
-
-            function saveKey(event) {
-                var container = event.target.parentNode;
-                localStorage.setItem(container.children[0].value, container.children[1].value);
-            }
-
-            function deleteKey(event) {
-                var container = event.target.parentNode;
-                localStorage.removeItem(container.children[0].value);
-                container.parentNode.removeChild(container);
+            function printallkeys() {
+                document.body.innerHTML = '';
+                for (var i = 0, len = localStorage.length; i < len; i++) {
+                    createElement('div',
+                            document.body,
+                            localStorage.key(i) + ': ' + localStorage.getItem(localStorage.key(i)),
+                            'panel');
+                }
             }
 
             function createElement(type, parent, innerHTML, className, attrs) {
@@ -47,7 +37,6 @@
             }
 
         });
-
     </script>
 </head>
 <body>

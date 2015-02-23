@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Primes</title>
+    <link rel="stylesheet" href="base.css"/>
+    <style>
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('button').addEventListener('click', function () {
+                document.querySelector('.panel').innerHTML = Math.random();
+            });
+            document.querySelector('button.primes').addEventListener('click', function () {
+                var div = document.querySelector('div.panel.results');
+                div.innerHTML = generatePrimes(500000);
+            });
+
+            function generatePrimes(n) {
+                var start = new Date();
+                var primes = [2];
+                var num = 3;
+                while (primes.length < n) {
+                    if (isPrime(num)) primes.push(num);
+                    num++;
+                }
+                return 'Time taken: ' + ((new Date()) - start) + 'ms <br/>' +  primes.join(', ');
+            }
+
+            function isPrime(num) {
+                if (num < 2) return false;
+                else {
+                    for (var i = 2, len = Math.sqrt(num); i <= len; i++) {
+                        if (num % i === 0) return false;
+                    }
+                }
+                return true;
+            }
+        });
+
+    </script>
+</head>
+<body>
+    <button>Display Random Number</button>
+    <div class="panel">Random number here .... </div>
+    <button class="primes">Calculate Primes</button>
+    <div class="panel results">
+        Primes here ...
+    </div>
+</body>
+</html>
